@@ -1,1 +1,80 @@
-/* Place custom css here */
+:root {
+  --black: #181819;
+  --bg-dim: #222327;
+  --bg0: #2C2E34;
+  --bg1: #33353F;
+  --bg2: #363944;
+  --bg3: #3B3E48;
+  --bg4: #414550;
+  --gray-dim: #595F6F;
+  --red: #FC5D7C;
+  --orange: #F39660;
+  --yellow: #E7C664;
+  --green: #9ED072;
+  --blue: #76CCE0;
+  --purple: #B39DF3;
+  --fg: #E2E2E3;
+  --gray: #7F8490;
+  --bg-red: #FF6077;
+  --diff-red: #55393D;
+  --diff-green: #394634;
+  --bg-green: #A7DF78;
+  --bg-blue: #85D3F2;
+  --diff-blue: #354157;
+  --diff-yellow: #4E432F;
+
+  /* Main theme variables */
+  --bg: var(--bg-dim);
+  --bg-alt: var(--bg1);
+  --fg-alt: var(--gray);
+  --accent: var(--diff-blue);
+}
+
+/* Light mode overrides */
+@media (prefers-color-scheme: light) {
+  :root {
+  --black: #f8f8f8;
+  --bg-dim: #f4f4f6;
+  --bg0: #ffffff;
+  --bg1: #f0f0f2;
+  --bg2: #e9e9ec;
+  --bg3: #e2e2e6;
+  --bg4: #dadade;
+  --gray-dim: #b0b4c0;
+  --red: #d72638;
+  --orange: #f39660;
+  --yellow: #e7c664;
+  --green: #4caf50;
+  --blue: #1976d2;
+  --purple: #7e57c2;
+  --fg: #2C2E34;
+  --gray: #595f6f;
+  --bg-red: #ff6077;
+  --diff-red: #FC5D7C;
+  --diff-green: #9ED072;
+  --bg-green: #a7df78;
+  --bg-blue: #bbdefb;
+  --diff-blue: #76CCE0;
+  --diff-yellow: #fffde7;
+
+  --bg: var(--bg-dim);
+  --bg-alt: var(--bg1);
+  --fg-alt: var(--gray);
+  --accent: var(--diff-blue);
+  }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+a {
+  border-bottom: 2px solid var(--accent);
+  text-decoration: none;
+}
+a:hover {
+  border-bottom-color: var(--accent);
+  background-color: var(--accent);
+  color: var(--fg);
+}
