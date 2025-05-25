@@ -1,12 +1,20 @@
 {{ define "main" }}
 
 <div class="not-found">
-
-    <div>
-        <h1> typo? </h1>
-        <p> Click <a href="/">here</a> to return home </p>
+    <div></div>
+    <div id="falling-404" style="display:inline-block; cursor:pointer; transition: transform 2s cubic-bezier(.68,-0.55,.27,1.55);">
+        <h1>404</h1>
+        <script>
+        document.getElementById('falling-404').onclick = function() {
+            const randX = Math.floor(Math.random() * 20) - 10; // -50 to +49 px
+            const randY = 200 + Math.floor(Math.random() * 100); // 200 to 299 px
+            const randRot = 120 + Math.floor(Math.random() * 60); // 120 to 179 deg
+            this.style.transform = `translateX(${randX}px) translateY(${randY}px) rotate(${randRot}deg)`;
+        };
+        </script>
+        <h2> Here's a <a href="/">🗺️</a> to return home </h2>
     </div>
-
+    
 </div>
 
 {{ end }}
