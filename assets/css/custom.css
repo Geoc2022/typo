@@ -41,12 +41,12 @@
   --bg3: #e2e2e6;
   --bg4: #dadade;
   --gray-dim: #b0b4c0;
-  --red: #d72638;
+  --red: #FC5D7C;
   --orange: #f39660;
-  --yellow: #e7c664;
-  --green: #4caf50;
-  --blue: #1976d2;
-  --purple: #7e57c2;
+  --yellow: #E7C664;
+  --green: #9ED072;
+  --blue: #76CCE0;
+  --purple: #B39DF3;
   --fg: #2C2E34;
   --gray: #595f6f;
   --bg-red: #ff6077;
@@ -67,11 +67,13 @@
 body {
   background: var(--bg);
   color: var(--fg);
+  transition: background .3s ease, color .3s ease;
 }
 
 a {
   border-bottom: 2px solid var(--accent);
   text-decoration: none;
+  transition: border-bottom .3s ease, background .3s ease, color .3s ease;
 }
 a:hover {
   border-bottom-color: var(--accent);
