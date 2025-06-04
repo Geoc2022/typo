@@ -30,7 +30,7 @@
 </div>
 {{ end }}
 
-{{/* Collection Section */}}
+<!-- {{/* Collection Section */}}
 
 {{ if .Site.Params.homeCollection }}
 
@@ -56,6 +56,27 @@
     {{ partial "pagination-controls.html" $paginator}}
 
     {{ end }}
-</div>
+</div> -->
+
+{{ with .Site.Params.homeSections }}
+  {{ range $section := . }}
+    <div class="list-container">
+
+      {{ $titleKey := printf "%sTitle" $section }}
+      {{ with index $.Site.Params $titleKey }}
+        <h1>{{ . }}</h1>
+      {{ else }}
+        <h1>{{ $section | title }}</h1>
+      {{ end }}
+
+      {{ $pages := where $.Site.RegularPages "Section" $section }}
+      {{ range $index, $page := $pages }}
+        {{ partial "post-entry.html" $page }}
+      {{ end }}
+
+    </div>
+  {{ end }}
+{{ end }}
+
 
 {{ end }}
