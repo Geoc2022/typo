@@ -10,7 +10,8 @@
 
 </div>
 
-# Typo, a Hugo theme.
+# My Personal Fork of Typo, a Hugo theme.
+# See an example of this theme: [george.chemmala.com](https://george.chemmala.com)
 
 Typo is a theme backed by simplicity, as you can see in the screenshots below. The goal was to have a website centered around content and nothing more.
 
