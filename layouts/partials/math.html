@@ -5,16 +5,28 @@
   src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.js"></script>
 
 <script defer
-  src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"
-  onload="renderMathInElement(document.body);"></script>
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function() {
     renderMathInElement(document.body, {
       delimiters: [
         { left: "$$", right: "$$", display: true },
         { left: "$", right: "$", display: false }
-      ]
+      ],
+      throwOnError: false,
+      macros: {
+        "\\N": "\\mathbb{N}",
+        "\\Z": "\\mathbb{Z}",
+        "\\Q": "\\mathbb{Q}",
+        "\\R": "\\mathbb{R}",
+        "\\C": "\\mathbb{C}",
+        "\\F": "\\mathbb{F}",
+        "\\epsilon": "\\varepsilon",
+        "\\implies": "\\Rightarrow",
+        "\\impliedby": "\\Leftarrow",
+        "\\iff": "\\Leftrightarrow",
+      }
     });
   });
 </script>
