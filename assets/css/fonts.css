@@ -1,4 +1,19 @@
 @font-face {
+    font-family: 'Outfit';
+    src: url('/fonts/Outfit/Outfit-VariableFont_wght.ttf') format('truetype');
+    font-weight: 300 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Urbanist';
+    src: url('/fonts/Urbanist/Urbanist-Italic-VariableFont_wght') format('truetype');
+    font-weight: 290 580;
+    font-style: italic;
+    font-display: swap;
+}
+/* @font-face {
     font-family: 'Literata';
     src: url('/fonts/Literata/Literata-Light.woff2') format('woff2');
     font-weight: light;
@@ -28,7 +43,7 @@
     font-weight: bold;
     font-style: italic;
     font-display: swap;
-}
+} */
 
 @font-face {
     font-family: 'Monaspace';
@@ -45,3 +60,4 @@
     font-style: normal;
     font-display: swap;
 }
+
