@@ -12,7 +12,7 @@
     --header-menu-top-gap: 1rem;
 
     /* Typography */
-    --font-body: 'Outfit', Georgia, Cambria, 'Noto Serif', 'Droif Serif', ui-serif, serif;
+    --font-body: 'Outfit', Trebuchet MS, ui-sans-serif, sans-serif;
     --font-mono: "Monaspace", ui-monospace, monospace;
 
     --h1-margin-top: 2rem;
