@@ -29,4 +29,47 @@
       }
     });
   });
+
+  // load when #annotation__footnote-box.show 
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .katex {
+      font-size: 1em !important;
+    }
+  `;
+  document.head.appendChild(style);
+
+  const box = document.getElementById('annotation__footnote-box');
+  if (box) {
+    const observer = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'class' &&
+          box.classList.contains('show')
+        ) {
+          renderMathInElement(box, {
+            delimiters: [
+              { left: "$$", right: "$$", display: true },
+              { left: "$", right: "$", display: false }
+            ],
+            throwOnError: false,
+            macros: {
+              "\\N": "\\mathbb{N}",
+              "\\Z": "\\mathbb{Z}",
+              "\\Q": "\\mathbb{Q}",
+              "\\R": "\\mathbb{R}",
+              "\\C": "\\mathbb{C}",
+              "\\F": "\\mathbb{F}",
+              "\\epsilon": "\\varepsilon",
+              "\\implies": "\\Rightarrow",
+              "\\impliedby": "\\Leftarrow",
+              "\\iff": "\\Leftrightarrow",
+            }
+          });
+        }
+      }
+    });
+    observer.observe(box, { attributes: true });
+  }
 </script>
