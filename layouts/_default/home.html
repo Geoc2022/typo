@@ -72,17 +72,19 @@
     }
   </style>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {;
-      const sections = document.querySelectorAll('.list-container');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-      sections.forEach(section => observer.observe(section));
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(function() {
+        const sections = document.querySelectorAll('.list-container');
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.1 });
+        sections.forEach(section => observer.observe(section));
+      }, 100);
     });
   </script>
   {{ range $section := . }}
