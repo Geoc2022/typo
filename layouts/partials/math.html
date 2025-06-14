@@ -8,68 +8,46 @@
   src="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/contrib/auto-render.min.js"></script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.body, {
-      delimiters: [
-        { left: "$$", right: "$$", display: true },
-        { left: "$", right: "$", display: false }
-      ],
-      throwOnError: false,
-      macros: {
-        "\\N": "\\mathbb{N}",
-        "\\Z": "\\mathbb{Z}",
-        "\\Q": "\\mathbb{Q}",
-        "\\R": "\\mathbb{R}",
-        "\\C": "\\mathbb{C}",
-        "\\F": "\\mathbb{F}",
-        "\\epsilon": "\\varepsilon",
-        "\\implies": "\\Rightarrow",
-        "\\impliedby": "\\Leftarrow",
-        "\\iff": "\\Leftrightarrow",
-      }
-    });
-  });
-
-  // load when #annotation__footnote-box.show 
-  const style = document.createElement('style');
-  style.innerHTML = `
-    .katex {
-      font-size: 1em !important;
+  const katexOptions = {
+    delimiters: [
+      { left: "$$", right: "$$", display: true },
+      { left: "$", right: "$", display: false }
+    ],
+    throwOnError: false,
+    macros: {
+      "\\N": "\\mathbb{N}",
+      "\\Z": "\\mathbb{Z}",
+      "\\Q": "\\mathbb{Q}",
+      "\\R": "\\mathbb{R}",
+      "\\C": "\\mathbb{C}",
+      "\\F": "\\mathbb{F}",
+      "\\epsilon": "\\varepsilon",
+      "\\implies": "\\Rightarrow",
+      "\\impliedby": "\\Leftarrow",
+      "\\iff": "\\Leftrightarrow",
     }
-  `;
-  document.head.appendChild(style);
+  };
 
-  const box = document.getElementById('annotation__footnote-box');
-  if (box) {
-    const observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (
-          mutation.type === 'attributes' &&
-          mutation.attributeName === 'class' &&
-          box.classList.contains('show')
-        ) {
-          renderMathInElement(box, {
-            delimiters: [
-              { left: "$$", right: "$$", display: true },
-              { left: "$", right: "$", display: false }
-            ],
-            throwOnError: false,
-            macros: {
-              "\\N": "\\mathbb{N}",
-              "\\Z": "\\mathbb{Z}",
-              "\\Q": "\\mathbb{Q}",
-              "\\R": "\\mathbb{R}",
-              "\\C": "\\mathbb{C}",
-              "\\F": "\\mathbb{F}",
-              "\\epsilon": "\\varepsilon",
-              "\\implies": "\\Rightarrow",
-              "\\impliedby": "\\Leftarrow",
-              "\\iff": "\\Leftrightarrow",
-            }
-          });
-        }
-      }
-    });
-    observer.observe(box, { attributes: true });
+  function renderMathIn(element) {
+    if (typeof renderMathInElement === "function") {
+      renderMathInElement(element, katexOptions);
+    }
   }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    renderMathIn(document.body);
+
+    const style = document.createElement('style');
+    style.textContent = `.katex { font-size: 1em !important; }`;
+    document.head.appendChild(style);
+
+    const box = document.getElementById('annotation__footnote-box');
+    if (box) {
+      new MutationObserver(mutations => {
+        if (box.classList.contains('show')) {
+          renderMathIn(box);
+        }
+      }).observe(box, { attributes: true, attributeFilter: ['class'] });
+    }
+  });
 </script>
