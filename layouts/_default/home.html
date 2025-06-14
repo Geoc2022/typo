@@ -59,6 +59,32 @@
 </div> -->
 
 {{ with .Site.Params.homeSections }}
+  <style>
+    .list-container {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.4,0,.2,1);
+      will-change: opacity, transform;
+    }
+    .list-container.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {;
+      const sections = document.querySelectorAll('.list-container');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
+    });
+  </script>
   {{ range $section := . }}
     <div class="list-container">
 
