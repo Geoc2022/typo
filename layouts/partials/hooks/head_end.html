@@ -86,11 +86,13 @@
         if (!note) return;
         const box = document.getElementById('annotation__footnote-box');
         const accent = el.getAttribute('data-annotation-accent');
-        const accent_solid = el.getAttribute('data-annotation-accent-solid') || 'var(--blue)';
+        const accent_solid = el.getAttribute('data-annotation-accent-solid');
         const bg = el.getAttribute('data-annotation-bg');
-        if (accent) box.style.setProperty('--annotation-accent', accent);
         if (accent_solid) box.style.setProperty('--annotation-accent', accent_solid);
-        else box.style.removeProperty('--annotation-accent');
+        else {
+            if (accent) box.style.setProperty('--annotation-accent', accent);
+            else box.style.removeProperty('--annotation-accent');
+        }
         if (bg) box.style.setProperty('--annotation-bg', bg);
         else box.style.removeProperty('--annotation-bg');
         if (isMobile()) {
