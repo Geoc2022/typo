@@ -92,14 +92,14 @@
 
       {{ $titleKey := printf "%sTitle" $section }}
       {{ with index $.Site.Params $titleKey }}
-        <h1>{{ . }}</h1>
+      <h1>{{ . }}</h1>
       {{ else }}
-        <h1>{{ $section | title }}</h1>
+      <h1>{{ $section | title }}</h1>
       {{ end }}
 
-      {{ $pages := where $.Site.RegularPages "Section" $section }}
+      {{ $pages := first 7 (where $.Site.RegularPages "Section" $section) }}
       {{ range $index, $page := $pages }}
-        {{ partial "post-entry.html" $page }}
+      {{ partial "post-entry.html" $page }}
       {{ end }}
 
     </div>
