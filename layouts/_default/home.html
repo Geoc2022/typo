@@ -100,6 +100,11 @@
       {{ $pages := first 7 (where $.Site.RegularPages "Section" $section) }}
       {{ range $index, $page := $pages }}
       {{ partial "post-entry.html" $page }}
+      {{ if and (eq (add $index 1) (len $pages)) (gt (len (where $.Site.RegularPages "Section" $section)) 7) }}
+        <div class="see-more">
+          <a href="{{ (printf "/%s/" $section) | relURL }}"  style="color: var(--gray)">See more &rarr;</a>
+        </div>
+      {{ end }}
       {{ end }}
 
     </div>
