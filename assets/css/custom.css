@@ -28,6 +28,12 @@
   --bg-alt: var(--bg1);
   --fg-alt: var(--gray);
   --accent: var(--diff-blue);
+
+  --content-primary: var(--fg);
+  --content-secondary: var(--gray);
+  --background: var(--bg);
+  --code-background: var(--bg2);
+  --code-border: var(--bg2);
 }
 
 /* Light mode overrides */
@@ -61,6 +67,12 @@
   --bg-alt: var(--bg1);
   --fg-alt: var(--gray);
   --accent: var(--diff-blue);
+  
+  --content-primary: var(--fg);
+  --content-secondary: var(--gray);
+  --background: var(--bg);
+  --code-background: var(--bg2);
+  --code-border: var(--bg2);
   }
 }
 
