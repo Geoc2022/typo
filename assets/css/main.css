@@ -85,9 +85,8 @@ input {
 }
 
 /* Code blocks */
-
 .copy-code-button {
-  background-color: var(--background);
+  background-color: var(--code-background);
   font-family: var(--font-mono);
   padding: 3px 6px;
   font-size: 0.8em;
@@ -142,7 +141,7 @@ code {
 li code,
 table code,
 p code {
-  background-color: var(--code-background);
+  background-color: var(--bg4);
   border-radius: 3px;
   padding: 2px;
 }

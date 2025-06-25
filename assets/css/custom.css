@@ -71,8 +71,8 @@
   --content-primary: var(--fg);
   --content-secondary: var(--gray);
   --background: var(--bg);
-  --code-background: var(--bg2);
-  --code-border: var(--bg2);
+  --code-background: var(--fg);
+  --code-border: var(--fg);
   }
 }
 
