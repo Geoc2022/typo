@@ -1,3 +1,4 @@
+/* Theme Variables */
 :root {
   --black: #181819;
   --bg-dim: #222327;
@@ -23,22 +24,21 @@
   --diff-blue: #354157;
   --diff-yellow: #4E432F;
 
-  /* Main theme variables */
   --bg: var(--bg-dim);
   --bg-alt: var(--bg1);
   --fg-alt: var(--gray);
   --accent: var(--diff-blue);
-
   --content-primary: var(--fg);
   --content-secondary: var(--gray);
   --background: var(--bg);
   --code-background: var(--bg2);
   --code-border: var(--bg2);
+
+  --transition-speed: 0.0s;
 }
 
-/* Light mode overrides */
-@media (prefers-color-scheme: light) {
-  :root {
+/* Light Theme Overrides */
+.light {
   --black: #f8f8f8;
   --bg-dim: #f4f4f6;
   --bg0: #ffffff;
@@ -47,12 +47,6 @@
   --bg3: #e2e2e6;
   --bg4: #dadade;
   --gray-dim: #b0b4c0;
-  --red: #FC5D7C;
-  --orange: #f39660;
-  --yellow: #E7C664;
-  --green: #9ED072;
-  --blue: #76CCE0;
-  --purple: #B39DF3;
   --fg: #2C2E34;
   --gray: #595f6f;
   --bg-red: #ff6077;
@@ -67,28 +61,81 @@
   --bg-alt: var(--bg1);
   --fg-alt: var(--gray);
   --accent: var(--diff-blue);
-  
   --content-primary: var(--fg);
   --content-secondary: var(--gray);
   --background: var(--bg);
   --code-background: var(--fg);
   --code-border: var(--fg);
-  }
+
+  --transition-speed: 0.0s;
 }
 
 body {
   background: var(--bg);
   color: var(--fg);
-  transition: background .3s ease, color .3s ease;
+  transition: background var(--transition-speed) ease, 
+              color var(--transition-speed) ease;
 }
 
 a {
   border-bottom: 2px solid var(--accent);
   text-decoration: none;
-  transition: border-bottom .3s ease, background .3s ease, color .3s ease;
+  transition: border-bottom var(--transition-speed) ease, 
+              background var(--transition-speed) ease, 
+              color var(--transition-speed) ease;
 }
 a:hover {
   border-bottom-color: var(--accent);
   background-color: var(--accent);
   color: var(--fg);
+}
+
+/* Theme Toggle Button */
+.theme-switcher {
+  --theme-switcher-color: var(--accent);
+}
+
+.theme-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.theme-button svg {
+  stroke: var(--theme-switcher-color);
+  pointer-events: none;
+  transition: stroke 400ms;
+}
+
+.theme-button:hover {
+  --theme-switcher-color: var(--blue);
+}
+
+/* Sun/Moon Animation */
+.moon {
+  opacity: 0;
+  stroke-dasharray: 0 1px;
+  transition: stroke-dasharray 200ms ease-in, opacity 400ms ease-in;
+}
+.sun {
+  opacity: 1;
+  stroke-dasharray: 1px 1px;
+  transition: stroke-dasharray 200ms ease-in, opacity 400ms ease-in;
+}
+.dark .moon {
+  opacity: 1;
+  stroke-dasharray: 1px 1px;
+}
+.dark .sun {
+  opacity: 0;
+  stroke-dasharray: 0 1px;
+}
+
+.notransition * {
+  transition: none !important;
 }
