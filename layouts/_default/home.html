@@ -6,13 +6,13 @@
 
 {{ if or .Site.Params.homeIntroTitle .Site.Params.homeIntroContent }}
 <div class="intro">
-    {{ with .Site.Params.homeIntroTitle }}
-    <h1>{{ . | markdownify }}</h1>
-    {{ end }}
+  {{ with .Site.Params.homeIntroTitle }}
+  <h1>{{ . | markdownify }}</h1>
+  {{ end }}
 
-    {{ with .Site.Params.homeIntroContent }}
-    <p>{{ . | markdownify }}</p>
-    {{ end }}
+  {{ with .Site.Params.homeIntroContent }}
+  <p>{{ . | markdownify }}</p>
+  {{ end }}
 </div>
 {{ end }}
 
@@ -20,13 +20,12 @@
 
 {{ with site.Params.social }}
 <div class="social-icons">
-    {{- range . }}
-    <a href="{{ trim .url " " | safeURL }}" target="_blank"
-        rel="noopener noreferrer me"
-        title="{{ (.title | default .name) | title }}">
-        {{ partial "svg.html" . }}
-    </a>
-    {{- end }}
+  {{- range . }}
+  <a href="{{ trim .url " " | safeURL }}" target="_blank" rel="noopener noreferrer me"
+    title="{{ (.title | default .name) | title }}">
+    {{ partial "svg.html" . }}
+  </a>
+  {{- end }}
 </div>
 {{ end }}
 
@@ -59,56 +58,69 @@
 </div> -->
 
 {{ with .Site.Params.homeSections }}
-  <style>
+<style>
+  .list-container {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.4, 0, .2, 1);
+    will-change: opacity, transform;
+  }
+
+  .list-container.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     .list-container {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.4,0,.2,1);
-      will-change: opacity, transform;
+      transition: none !important;
     }
-    .list-container.visible {
-      opacity: 1;
-      transform: none;
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const loadSections = () => {
+      const sections = document.querySelectorAll('.list-container');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {threshold: 0.1});
+      sections.forEach(section => observer.observe(section));
+    };
+
+    if ('requestIdleCallback' in window) {
+      requestIdleCallback(loadSections);
+    } else {
+      requestAnimationFrame(loadSections);
     }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(function() {
-        const sections = document.querySelectorAll('.list-container');
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.1 });
-        sections.forEach(section => observer.observe(section));
-      }, 100);
-    });
-  </script>
-  {{ range $section := . }}
-    <div class="list-container">
+  });
+</script>
+{{ range $section := . }}
+<div class="list-container">
 
-      {{ $titleKey := printf "%sTitle" $section }}
-      {{ with index $.Site.Params $titleKey }}
-      <h1>{{ . }}</h1>
-      {{ else }}
-      <h1>{{ $section | title }}</h1>
-      {{ end }}
-
-      {{ $pages := first 7 (where $.Site.RegularPages "Section" $section) }}
-      {{ range $index, $page := $pages }}
-      {{ partial "post-entry.html" $page }}
-      {{ if and (eq (add $index 1) (len $pages)) (gt (len (where $.Site.RegularPages "Section" $section)) 7) }}
-        <div class="see-more">
-          <a href="{{ (printf "/%s/" $section) | relURL }}"  style="color: var(--gray)">See more &rarr;</a>
-        </div>
-      {{ end }}
-      {{ end }}
-
-    </div>
+  {{ $titleKey := printf "%sTitle" $section }}
+  {{ with index $.Site.Params $titleKey }}
+  <h1>{{ . }}</h1>
+  {{ else }}
+  <h1>{{ $section | title }}</h1>
   {{ end }}
+
+  {{ $pages := first 7 (where $.Site.RegularPages "Section" $section) }}
+  {{ range $index, $page := $pages }}
+  {{ partial "post-entry.html" $page }}
+  {{ if and (eq (add $index 1) (len $pages)) (gt (len (where $.Site.RegularPages "Section" $section)) 7) }}
+  <div class="see-more">
+    <a href="{{ (printf " /%s/" $section) | relURL }}" style="color: var(--gray)">See more &rarr;</a>
+  </div>
+  {{ end }}
+  {{ end }}
+
+</div>
+{{ end }}
 {{ end }}
 
 
